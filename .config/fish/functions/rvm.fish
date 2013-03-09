@@ -11,7 +11,7 @@ function rvm -d 'Ruby enVironment Manager'
 
   set -l env_file (mktemp -t rvm.fish.XXXXXXXXXX)
   bash -c 'source '$rvm_script'; rvm "$@"; status=$?; env > "$0"; exit $status' $env_file $argv
-  and eval (grep '^rvm\|^[^=]*PATH' $env_file | sed '/^[^=]*PATH/y/:/ /; s/^/set -xg /; s/=/ /; s/$/ ;/; s/(//; s/)//')
+  and eval (grep '^rvm\|^[^=]*PATH' $env_file | grep -v _clr | sed '/^[^=]*PATH/y/:/ /; s/^/set -xg /; s/=/ /; s/$/ ;/; s/(//; s/)//')
 
   rm -f $env_file
 end
